@@ -28,7 +28,7 @@ namespace Tests
             // Assert
             // Ensure that the review was added to the repository
             var retrievedReview = fakeRepo.Reviews.ToList()[0];
-            Assert.Equal(System.DateTime.Now.Date.CompareTo(retrievedReview.ReviewDate.Date), 0);
+            Assert.Equal(0, System.DateTime.Now.Date.CompareTo(retrievedReview.ReviewDate.Date));
         }
     }
 }
