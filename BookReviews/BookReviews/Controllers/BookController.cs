@@ -34,9 +34,12 @@ namespace BookReviews.Controllers
         [HttpPost]
         public IActionResult Review(Review model)
         {
-            model.ReviewDate = DateTime.Now;
-            // Store the model in the database
-            repo.AddReview(model);
+            if (ModelState.IsValid)
+            {
+                model.ReviewDate = DateTime.Now;
+                // Store the model in the database
+                repo.AddReview(model);
+            }
 
             return View(model);
         }
