@@ -12,7 +12,7 @@ namespace BookReviews.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -25,7 +25,7 @@ namespace BookReviews.Migrations
                 columns: table => new
                 {
                     ReviewID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     BookTitle = table.Column<string>(maxLength: 100, nullable: false),
                     AuthorName = table.Column<string>(maxLength: 100, nullable: false),
                     ReviewerUserID = table.Column<int>(nullable: true),
