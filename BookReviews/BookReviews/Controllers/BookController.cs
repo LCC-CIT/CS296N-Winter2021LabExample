@@ -36,8 +36,10 @@ namespace BookReviews.Controllers
         {
             model.ReviewDate = DateTime.Now;
             // Store the model in the database
-            repo.AddReview(model);
-
+            if(ModelState.IsValid)
+            { 
+                repo.AddReview(model);
+            }
             return View(model);
         }
 

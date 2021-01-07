@@ -5,8 +5,8 @@
 <h1>Book Review</h1>
 <strong>Enter your Review</strong>
 <br />
-<div asp-validation-summary="All"></div>
 <form method="post" class="container">
+    <div asp-validation-summary="All"></div>
     <div class="row p-2">
         <label asp-for="BookTitle" class="control-label col-md-1">Title</label>
         <input asp-for="BookTitle" class="form-control col-md-6" />
