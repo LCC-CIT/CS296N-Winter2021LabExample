@@ -1,0 +1,46 @@
+﻿@model List<Review>
+
+@{
+    ViewData["Title"] = "Book Reviews";
+}
+
+<h1 class="display-4">Filter Reviews</h1>
+Enter a book title:
+<form method="post" class="container">
+    <div class="row p-2">
+        <label for="BookTitle" class="control-label col-md-1">Title</label>
+        <input name="BookTitle" class="form-control col-md-6" />
+    </div>
+    <div class="row p-2">
+        <button type="submit" class="form-control btn btn-success col-2">Submit</button>
+        <a asp-action="Reviews" class="btn btn-secondary col-3">Reset</a>
+    </div>
+</form>
+
+<form method="post" class="container">
+    <div class="row p-2">
+        <label for="ReviewerName" class="control-label col-md-1">Reviewer Name</label>
+        <input name="ReviewerName" class="form-control col-md-6" />
+    </div>
+    <div class="row p-2">
+        <button type="submit" class="form-control btn btn-success col-2">Submit</button>
+    </div>
+</form>
+
+<h1 class="display-4">Book Reviews</h1>
+
+    @foreach (Review review in Model)
+    {
+        <p>
+            <strong class="m-3">Title:</strong>
+            @review.BookTitle<br />
+            <strong class="m-3">Author:</strong>
+            @review.AuthorName<br />
+            <strong class="m-3">Reviewer:</strong>
+            @review.Reviewer.Name<br />
+            <strong class="m-3">Review Date:</strong>
+            @review.ReviewDate.Date<br />
+            <strong class="m-3">Review:</strong>
+            @review.ReviewText<br />
+        </p>
+    }
