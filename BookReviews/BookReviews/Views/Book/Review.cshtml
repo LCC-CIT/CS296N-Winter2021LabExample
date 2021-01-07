@@ -5,6 +5,7 @@
 <h1>Book Review</h1>
 <strong>Enter your Review</strong>
 <br />
+<div asp-validation-summary="All"></div>
 <form method="post" class="container">
     <div class="row p-2">
         <label asp-for="BookTitle" class="control-label col-md-1">Title</label>
@@ -20,7 +21,7 @@
     </div>
     <div class="row p-2">
         <label asp-for="ReviewText" class="control-label  col-md-1">Review</label><br />
-        <textarea asp-for="ReviewText" placeholder="Write your review here" class="form-control col-md-6" >
+        <textarea asp-for="ReviewText" placeholder="Write your review here" class="form-control col-md-6">
 </textarea>
     </div>
     <div class="row p-2">
