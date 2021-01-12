@@ -26,7 +26,7 @@ namespace Tests
             {
                 BookTitle = "Grapes of Wrath",
                 AuthorName = "Salinger",
-                Reviewer = new User() { Name = "Me" },
+                Reviewer = new AppUser() { Name = "Me" },
                 ReviewText = "Never actually read it"
             };
 
@@ -49,7 +49,7 @@ namespace Tests
                 "1234567890123456789012345678901234567890" +
                 "123456789012345678901",  // too long
                 AuthorName = null,  // required but null
-                Reviewer = new User() { Name = "Me" },
+                Reviewer = new AppUser() { Name = "Me" },
                 ReviewText = ""   // too short
             };
 

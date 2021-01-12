@@ -1,19 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 
 namespace BookReviews.Models
 {
-    public class BookReviewContext : DbContext
+    public class BookReviewContext : IdentityDbContext
     {
         public BookReviewContext(
 
      DbContextOptions<BookReviewContext> options) : base(options) { }
 
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<AppUser> Users { get; set; }
     }
 }

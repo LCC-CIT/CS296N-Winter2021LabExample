@@ -18,7 +18,7 @@ namespace BookReviews.Models
                     BookTitle = "Prince of Foxes",
                     AuthorName = "Samuel Shellabarger",
                     ReviewText = "Great book, a must read!",
-                    Reviewer = new User { Name = "Emma Watson" },
+                    Reviewer = new AppUser { Name = "Emma Watson" },
                     ReviewDate = DateTime.Parse("11/1/2020")
                 };
                 context.Reviews.Add(review);  // queues up the review to be added to the DB
@@ -28,7 +28,7 @@ namespace BookReviews.Models
                     BookTitle = "Prince of Foxes",
                     AuthorName = "Samuel Shellabarger",
                     ReviewText = "I love the clever, witty dialog",
-                    Reviewer = new User { Name = "Daniel Radliiffe" },
+                    Reviewer = new AppUser { Name = "Daniel Radliiffe" },
                     ReviewDate = DateTime.Parse("11/15/2020")
                 };
                 context.Reviews.Add(review);
@@ -37,7 +37,7 @@ namespace BookReviews.Models
                 // the user object once and store it so that both reviews will be
                 // associated with the same entity in the DB.
 
-                User reviewerBrianBird = new User() { Name = "Brian Bird" };
+                AppUser reviewerBrianBird = new AppUser() { Name = "Brian Bird" };
                 context.Users.Add(reviewerBrianBird);
                 context.SaveChanges();   // This will add a UserID to the reviewer object
 
