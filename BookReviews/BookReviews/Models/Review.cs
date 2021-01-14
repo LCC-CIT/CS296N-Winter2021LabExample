@@ -11,7 +11,7 @@ namespace BookReviews.Models
         [Required(ErrorMessage = "Author is required")]
         [StringLength(100, MinimumLength = 3)]
         public string AuthorName { get; set; }
-        public User Reviewer { get; set; }
+        public AppUser Reviewer { get; set; }
         [Required]
         public string ReviewText { get; set; }
         public DateTime ReviewDate { get; set; }
