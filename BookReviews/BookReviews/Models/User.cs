@@ -1,11 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
+using System.ComponentModel.DataAnnotations;
+
 namespace BookReviews.Models
 {
     public class AppUser : IdentityUser
     {
-        [StringLength(100, MinimumLength = 3)]
+        public int UserID { get; set; }
+        [StringLength(60, MinimumLength = 1)]
         [Required]
         public string Name { get; set; }
     }
