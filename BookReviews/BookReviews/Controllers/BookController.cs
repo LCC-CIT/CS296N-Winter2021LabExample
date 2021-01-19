@@ -33,7 +33,9 @@ namespace BookReviews.Controllers
 
         [HttpPost]
         public IActionResult Review(Review model)
-        {
+        { 
+            // TODO: Pull the current user object from the database and use it here for Reviewer
+            model.Reviewer.Name = User.Identity.Name;
             model.ReviewDate = DateTime.Now;
             // Store the model in the database
             repo.AddReview(model);

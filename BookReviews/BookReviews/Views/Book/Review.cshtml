@@ -17,10 +17,12 @@
         <input asp-for="AuthorName" class="form-control col-md-6" /><br />
         <span asp-validation-for="AuthorName" class="text-danger"></span>
     </div>
-    <div class="row p-2">
-        <label asp-for="Reviewer.Name" class="control-label  col-md-1">Reviewer</label><br />
-        <input asp-for="Reviewer.Name" class="form-control col-md-6" /><br />
-    </div>
+    @*
+        <div class="row p-2">
+            <label asp-for="Reviewer.Name" class="control-label  col-md-1">Reviewer</label><br />
+            <input asp-for="Reviewer.Name" class="form-control col-md-6" /><br />
+        </div>
+    *@
     <div class="row p-2">
         <label asp-for="ReviewText" class="control-label  col-md-1">Review</label><br />
         <textarea asp-for="ReviewText" placeholder="Write your review here" class="form-control col-md-6">

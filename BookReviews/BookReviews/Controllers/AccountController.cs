@@ -45,6 +45,39 @@ namespace BookReviews.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult LogIn(string returnURL = "")
+        {
+            var model = new LoginVM { 
+            ReturnUrl = returnURL }; 
+            return View(model);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    { return Redirect(model.ReturnUrl); }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid username/password."); 
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> LogOut()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
