@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BookReviews.Models;
 using BookReviews.Repos;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookReviews.Controllers
 {
     public class BookController : Controller
     {
         IReviewRepository repo;
+        private UserManager<AppUser> userManager;
 
-        public BookController(IReviewRepository r)
+        public BookController(IReviewRepository r, UserManager<AppUser> um)
         {
             repo = r;
+            userManager = um;
         }
 
 

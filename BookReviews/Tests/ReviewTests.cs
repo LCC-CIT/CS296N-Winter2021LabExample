@@ -15,7 +15,7 @@ namespace Tests
         public ReviewTests()
         {
             fakeRepo = new FakeReviewRepository();
-            controller = new BookController(fakeRepo);
+            controller = new BookController(fakeRepo, null);  // TODO: add user manger or work-around
         }
 
         [Fact]
