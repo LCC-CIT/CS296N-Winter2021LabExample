@@ -34,9 +34,10 @@ namespace BookReviews.Controllers
 
         [HttpPost]
         public IActionResult Review(Review model)
-        { 
-            // TODO: Pull the current user object from the database and use it here for Reviewer
-            model.Reviewer.Name = User.Identity.Name;
+        {
+           model.Reviewer = userManager.GetUserAsync(User).Result;
+            // TODO: modify the register code to get the user's name
+            model.Reviewer.Name = model.Reviewer.UserName;  // Temporary hack
             model.ReviewDate = DateTime.Now;
             // Store the model in the database
             repo.AddReview(model);
