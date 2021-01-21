@@ -15,7 +15,8 @@ namespace Tests
         public ReviewTests()
         {
             fakeRepo = new FakeReviewRepository();
-            controller = new BookController(fakeRepo);
+            // TODO: Fix the test now that there is a UserManager parameter needed
+            controller = new BookController(fakeRepo, null);
         }
 
         [Fact]

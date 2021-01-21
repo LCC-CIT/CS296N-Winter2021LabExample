@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,23 @@ namespace BookReviews.Models
 {
     public class SeedData
     {
-        public static void Seed(BookReviewContext context)
+        public static void Seed(BookReviewContext context, RoleManager<IdentityRole> roleManager)
         {
           if (!context.Reviews.Any())  // this is to prevent duplicate data from being added
             {
+                // Create "Member" role
+                // TODO: check the result to see if the role was successfully added
+                var result = roleManager.CreateAsync(new IdentityRole("Member")).Result;
+
+                AppUser emmaWatson = new AppUser { Name = "Emma Watson" };
+                context.Users.Add(emmaWatson);
+
                 Review review = new Review
                 {
                     BookTitle = "Prince of Foxes",
                     AuthorName = "Samuel Shellabarger",
                     ReviewText = "Great book, a must read!",
-                    Reviewer = new AppUser { Name = "Emma Watson" },
+                    Reviewer = emmaWatson,
                     ReviewDate = DateTime.Parse("11/1/2020")
                 };
                 context.Reviews.Add(review);  // queues up the review to be added to the DB

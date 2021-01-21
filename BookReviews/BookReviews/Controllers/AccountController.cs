@@ -62,7 +62,9 @@ namespace BookReviews.Controllers
                 if (result.Succeeded)
                 {
                     if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    { return Redirect(model.ReturnUrl); }
+                    { 
+                        return Redirect(model.ReturnUrl); 
+                    }
                     else
                     {
                         return RedirectToAction("Index", "Home");

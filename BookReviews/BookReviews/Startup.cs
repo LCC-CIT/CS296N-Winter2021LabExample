@@ -73,8 +73,9 @@ namespace BookReviews
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            SeedData.Seed(context);
+            var serviceProvider = app.ApplicationServices;
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            SeedData.Seed(context, roleManager);
         }
     }
 }

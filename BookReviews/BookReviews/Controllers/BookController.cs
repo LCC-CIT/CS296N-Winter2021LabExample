@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using BookReviews.Models;
 using BookReviews.Repos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookReviews.Controllers
@@ -10,10 +12,12 @@ namespace BookReviews.Controllers
     public class BookController : Controller
     {
         IReviewRepository repo;
+        UserManager<AppUser> userManager;
 
-        public BookController(IReviewRepository r)
+        public BookController(IReviewRepository r, UserManager<AppUser> u)
         {
             repo = r;
+            userManager = u;
         }
 
 
@@ -24,6 +28,7 @@ namespace BookReviews.Controllers
         }
 
         // Show the view that has a form for entering a review
+        [Authorize]
         public IActionResult Review()
         {
             return View();
@@ -31,9 +36,10 @@ namespace BookReviews.Controllers
 
         [HttpPost]
         public IActionResult Review(Review model)
-        { 
-            // TODO: Pull the current user object from the database and use it here for Reviewer
-            model.Reviewer.Name = User.Identity.Name;
+        {
+            model.Reviewer = userManager.GetUserAsync(User).Result;
+            // TODO: get the user's real name in registration
+            model.Reviewer.Name = model.Reviewer.UserName;  // temporary hack
             model.ReviewDate = DateTime.Now;
             // Store the model in the database
             repo.AddReview(model);
