@@ -65,9 +65,13 @@ namespace BookReviews.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.HasKey("UserID");
-
-                    b.ToTable("Users");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
+                    b.HasDiscriminator().HasValue("AppUser");
                 });
 
             modelBuilder.Entity("BookReviews.Models.Review", b =>
