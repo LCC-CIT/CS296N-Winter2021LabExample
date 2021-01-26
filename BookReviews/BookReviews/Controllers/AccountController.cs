@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BookReviews.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : Controller 
     {
         private UserManager<AppUser> userManager;
         private SignInManager<AppUser> signInManager;
@@ -46,7 +46,7 @@ namespace BookReviews.Controllers
         }
 
         [HttpGet]
-        public IActionResult LogIn(string returnURL = "")
+        public IActionResult LogIn(string returnURL)
         {
             var model = new LoginVM { 
             ReturnUrl = returnURL }; 
