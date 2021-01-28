@@ -61,11 +61,11 @@ namespace BookReviews
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
+            app.UseAuthentication();  // UseAuthentication must come first
             app.UseAuthorization();
-            app.UseAuthentication();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -73,8 +73,9 @@ namespace BookReviews
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            SeedData.Seed(context);
+            var serviceProvider = app.ApplicationServices;
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            SeedData.Seed(context, roleManager);
         }
     }
 }
