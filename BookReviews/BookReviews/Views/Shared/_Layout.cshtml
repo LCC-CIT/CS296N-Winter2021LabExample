@@ -30,12 +30,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About</a>
                         </li>
+                        @*
+                            @if (User.)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account"
+                                       asp-action="LogOut">Logout</a> &nbsp; @User.Identity.Name
+                                </li>
+                            }
+                        *@
                         @if (signInManager.IsSignedIn(User))
                         {
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Account"
-                           asp-action="LogOut">Logout</a> &nbsp; @User.Identity.Name
-                    </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account"
+                                   asp-action="LogOut">Logout</a> &nbsp; @User.Identity.Name
+                            </li>
                         }
                         else
                         {
