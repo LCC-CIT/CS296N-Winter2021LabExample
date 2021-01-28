@@ -56,7 +56,7 @@ namespace BookReviews.Models
                 review = new Review
                 {
                     BookTitle = "Virgil Wander",
-                    AuthorName = "Lief Enger",
+                    AuthorName = "Leif Enger",
                     ReviewText = "Wonderful book, written by a distant cousin of mine.",
                     Reviewer = reviewerBrianBird,
                     ReviewDate = DateTime.Parse("11/30/2020")

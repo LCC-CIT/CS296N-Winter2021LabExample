@@ -61,10 +61,9 @@ namespace BookReviews
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseAuthentication();  // UseAuthentication must come first
             app.UseAuthorization();
 
 
