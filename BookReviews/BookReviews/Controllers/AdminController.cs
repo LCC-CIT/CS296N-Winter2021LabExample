@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookReviews.Controllers
 {
-   [Authorize]
+   [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
@@ -108,6 +108,9 @@ namespace BookReviews.Controllers
             if (result.Succeeded) { }
             return RedirectToAction("Index");
         }
+
+
+        /****************  Role management *******************/
 
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
