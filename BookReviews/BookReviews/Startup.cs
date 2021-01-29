@@ -23,6 +23,10 @@ namespace BookReviews
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // This service allows me to edit .cshtml views and see the result without restarting
+            // This service requires the Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation NuGet package
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+
             services.AddControllersWithViews();
 
             // Inject our repositories into our controllers

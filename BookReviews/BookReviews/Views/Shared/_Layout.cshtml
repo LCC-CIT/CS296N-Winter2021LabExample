@@ -30,20 +30,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="About" asp-action="Index">About</a>
                         </li>
-                        @*
-                            @if (User.)
+                        
+                            @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account"
-                                       asp-action="LogOut">Logout</a> &nbsp; @User.Identity.Name
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin"
+                                       >Administration</a>
                                 </li>
                             }
-                        *@
+                        
                         @if (signInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
+                            <li class="nav-item text-nowrap">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account"
-                                   asp-action="LogOut">Logout</a> &nbsp; @User.Identity.Name
+                                   asp-action="LogOut">Logout user: &nbsp; @User.Identity.Name</a> 
                             </li>
                         }
                         else
@@ -68,7 +68,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - BookReviews - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - Book Reviews - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
