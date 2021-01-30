@@ -27,7 +27,7 @@ namespace BookReviews.Controllers
             return View();
         }
 
-        // Show the view that has a form for entering a review
+        // Show the view that contains a form for entering a review
         [Authorize]
         public IActionResult Review()
         {
