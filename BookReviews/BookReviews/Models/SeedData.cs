@@ -34,9 +34,9 @@ namespace BookReviews.Models
 
                 Review review = new Review
                 {
-                    BookTitle = "Prince of Foxes",
-                    AuthorName = "Samuel Shellabarger",
-                    ReviewText = "Great book, a must read!",
+                    BookTitle = "Tigana",
+                    AuthorName = "Guy Gavriel Kay",
+                    ReviewText = "A wonderful fantasy book, a must read!",
                     Reviewer = emmaWatson,
                     ReviewDate = DateTime.Parse("11/1/2020")
                 };
