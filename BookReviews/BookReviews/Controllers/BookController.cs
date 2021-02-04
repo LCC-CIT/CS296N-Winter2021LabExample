@@ -75,5 +75,26 @@ namespace BookReviews.Controllers
 
             return View(reviews);
         }
+
+        // Open the form for entering a comment
+        [Authorize]
+        public IActionResult Comment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Comment(Comment model)
+        {
+            model.Commenter = userManager.GetUserAsync(User).Result;
+            // TODO: get the user's real name in registration
+            model.Commenter.Name = model.Commenter.UserName;  // temporary hack
+            model.CommentDate = DateTime.Now;
+            // Store the model in the database
+           // repo.AddComment(model);
+
+            return View(model);
+        }
+
     }
 };

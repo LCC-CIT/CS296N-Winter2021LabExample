@@ -31,16 +31,21 @@ Enter a book title:
 
     @foreach (Review review in Model)
     {
-        <p>
-            <strong class="m-3">Title:</strong>
-            @review.BookTitle<br />
-            <strong class="m-3">Author:</strong>
-            @review.AuthorName<br />
-            <strong class="m-3">Reviewer:</strong>
-            @review.Reviewer.Name<br />
-            <strong class="m-3">Review Date:</strong>
-            @review.ReviewDate.Date<br />
-            <strong class="m-3">Review:</strong>
-            @review.ReviewText<br />
-        </p>
+<p>
+    <strong class="m-3">Title:</strong>
+    @review.BookTitle<br />
+    <strong class="m-3">Author:</strong>
+    @review.AuthorName<br />
+    <strong class="m-3">Reviewer:</strong>
+    @review.Reviewer.Name<br />
+    <strong class="m-3">Review Date:</strong>
+    @review.ReviewDate.Date<br />
+    <strong class="m-3">Review:</strong>
+    @review.ReviewText<br />
+    @* TODO: show any comments *@
+    @* TODO: Add a link for adding a comment *@
+    
+    <a asp-action="Comment" asp-route-reviewId="@review.ReviewID" class="btn btn-secondary col-3">Add Comment</a>
+
+</p>
     }
