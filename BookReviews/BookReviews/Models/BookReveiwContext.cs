@@ -12,5 +12,6 @@ namespace BookReviews.Models
      DbContextOptions<BookReviewContext> options) : base(options) { }
 
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }
