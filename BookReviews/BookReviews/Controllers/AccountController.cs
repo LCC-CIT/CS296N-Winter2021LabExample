@@ -81,5 +81,10 @@ namespace BookReviews.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public ViewResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

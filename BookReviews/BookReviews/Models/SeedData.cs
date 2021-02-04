@@ -6,13 +6,26 @@ namespace BookReviews.Models
 {
     public class SeedData
     {
-        public static void Seed(BookReviewContext context, RoleManager<IdentityRole> roleManager)
+        public static void Seed(BookReviewContext context, UserManager<AppUser> userManager, 
+                                   RoleManager<IdentityRole> roleManager)
         {
           if (!context.Reviews.Any())  // this is to prevent duplicate data from being added
             {
-                // Create "Member" role
-                // TODO: check the result to see if the role was successfully added
+                // TODO: check the results and do something if the operation failed--if it ever does
                 var result = roleManager.CreateAsync(new IdentityRole("Member")).Result;
+                result = roleManager.CreateAsync(new IdentityRole("Admin")).Result;
+
+                // Seeding a default administrator. They will need to change their password after logging in.
+                AppUser siteadmin = new AppUser
+                {
+                    UserName = "SiteAdmin",
+                    Name = "Site Admin"
+                };
+                userManager.CreateAsync(siteadmin, "Secret-123").Wait();
+                IdentityRole adminRole = roleManager.FindByNameAsync("Admin").Result;
+                userManager.AddToRoleAsync(siteadmin, adminRole.Name);
+
+                // Seed users and reviews for manual site testing
 
                 AppUser emmaWatson = new AppUser { 
                     UserName = "EWatson", Name = "Emma Watson" };
@@ -21,9 +34,9 @@ namespace BookReviews.Models
 
                 Review review = new Review
                 {
-                    BookTitle = "Prince of Foxes",
-                    AuthorName = "Samuel Shellabarger",
-                    ReviewText = "Great book, a must read!",
+                    BookTitle = "Tigana",
+                    AuthorName = "Guy Gavriel Kay",
+                    ReviewText = "A wonderful fantasy book, a must read!",
                     Reviewer = emmaWatson,
                     ReviewDate = DateTime.Parse("11/1/2020")
                 };
@@ -49,7 +62,7 @@ namespace BookReviews.Models
                 // associated with the same entity in the DB.
 
                 AppUser reviewerBrianBird = new AppUser() { 
-                    UserName = "Bbird", Name = "Brian Bird" };
+                    UserName = "BBird", Name = "Brian Bird" };
                 context.Users.Add(reviewerBrianBird);
                 context.SaveChanges();   // This will add a UserID to the reviewer object
 
