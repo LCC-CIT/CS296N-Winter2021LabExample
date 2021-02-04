@@ -78,8 +78,9 @@ namespace BookReviews.Controllers
 
         // Open the form for entering a comment
         [Authorize]
-        public IActionResult Comment()
+        public IActionResult Comment(int reviewId)
         {
+            ViewBag.ReviewID = reviewId;
             return View();
         }
 
@@ -87,11 +88,12 @@ namespace BookReviews.Controllers
         public IActionResult Comment(Comment model)
         {
             model.Commenter = userManager.GetUserAsync(User).Result;
-            // TODO: get the user's real name in registration
-            model.Commenter.Name = model.Commenter.UserName;  // temporary hack
+            model.Commenter.Name = model.Commenter.UserName;  
             model.CommentDate = DateTime.Now;
-            // Store the model in the database
-           // repo.AddComment(model);
+            // Temp code for testing
+            int id = (int)TempData["ReviewID"];
+            // TODO: Store the model in the database
+           
 
             return View(model);
         }
