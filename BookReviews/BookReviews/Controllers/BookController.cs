@@ -80,22 +80,26 @@ namespace BookReviews.Controllers
         [Authorize]
         public IActionResult Comment(int reviewId)
         {
-            ViewBag.ReviewID = reviewId;
-            return View();
+            var commentVM = new CommentVM { ReviewID = reviewId };
+            return View(commentVM);
         }
 
         [HttpPost]
-        public IActionResult Comment(Comment model)
+        public RedirectToActionResult Comment(CommentVM commentVM)
         {
-            model.Commenter = userManager.GetUserAsync(User).Result;
-            model.Commenter.Name = model.Commenter.UserName;  
-            model.CommentDate = DateTime.Now;
-            // Temp code for testing
-            int id = (int)TempData["ReviewID"];
-            // TODO: Store the model in the database
-           
+            var comment = new Comment { CommentText = commentVM.CommentText };
+            comment.Commenter = userManager.GetUserAsync(User).Result;
+            comment.Commenter.Name = comment.Commenter.UserName;
+            comment.CommentDate = DateTime.Now;
+            // Retrieve the review that this comment is for
+            var review = (from r in repo.Reviews
+                      where r.ReviewID == commentVM.ReviewID
+                      select r).First<Review>();
+            // Store the review with the comment in the database
+            review.Comments.Add(comment);
+            repo.UpdateReview(review);
 
-            return View(model);
+            return RedirectToAction("Reviews");
         }
 
     }

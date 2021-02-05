@@ -22,5 +22,14 @@ namespace BookReviews.Repos
             reviews.Add(review);
         }
 
+        public void UpdateReview(Review reviewUpdate)
+        {
+            // find the old review by ID
+            var review = (from r in reviews
+                          where r.ReviewID == reviewUpdate.ReviewID
+                          select r).First<Review>();
+            review = reviewUpdate;  // replace the old review with the new one
+        }
+
     }
 }

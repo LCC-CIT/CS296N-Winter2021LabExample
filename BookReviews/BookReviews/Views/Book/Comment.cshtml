@@ -1,15 +1,15 @@
-﻿@model Comment
+﻿@model CommentVM
 @{
     ViewData["Title"] = "Comment";
 }
-@TempData["ReviewID"] = @ViewBag.ReviewID
-<h1>Book Review</h1>
+
+<h1>Book Review Comment</h1>
 <strong>Enter your Comment</strong>
 <br />
 <div asp-validation-summary="All" class="text-danger"></div>
 <form method="post" class="container">
     <div class="row p-2">
-        <label asp-for="CommentText" class="control-label  col-md-1">Review</label><br />
+        <label asp-for="CommentText" class="control-label  col-md-1">Comment</label><br />
         <textarea asp-for="CommentText" placeholder="Write your review here" class="form-control col-md-6">
 </textarea>
         <span asp-validation-for="CommentText" class="text-danger"></span>

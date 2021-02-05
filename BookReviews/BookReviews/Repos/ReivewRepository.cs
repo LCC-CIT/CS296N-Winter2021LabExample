@@ -17,16 +17,24 @@ namespace BookReviews.Repos
         public IQueryable<Review> Reviews 
         { 
             get 
-            { 
+            {
                 // Get all the Review objects in the Reviews DbSet
-                // and include the Reivewer object in each Review.
-                return context.Reviews.Include(review => review.Reviewer);
+                // and include the Reivewer object and list of comments in each Review.
+                return context.Reviews.Include(review => review.Reviewer)
+                                        .Include(review => review.Comments)
+                                        .ThenInclude(comment => comment.Commenter);
             }
         }
 
         public void AddReview(Review review)
         {
             context.Reviews.Add(review);
+            context.SaveChanges();
+        }
+
+        public void UpdateReview(Review review)
+        {
+            context.Reviews.Update(review);   // Find the review by ReviewID and update it
             context.SaveChanges();
         }
 
