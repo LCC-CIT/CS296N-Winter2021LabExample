@@ -22,5 +22,9 @@ namespace BookReviews.Repos
             reviews.Add(review);
         }
 
+        public void UpdateReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

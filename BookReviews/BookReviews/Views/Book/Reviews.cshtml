@@ -29,18 +29,36 @@ Enter a book title:
 
 <h1 class="display-4">Book Reviews</h1>
 
-    @foreach (Review review in Model)
+@foreach (Review review in Model)
+{
+    <p>
+        <h2>Review of <em>@review.BookTitle</em></h2>
+        <strong class="m-3">Author:</strong>
+        @review.AuthorName<br />
+        <strong class="m-3">Reviewer:</strong>
+        @review.Reviewer.Name<br />
+        <strong class="m-3">Review Date:</strong>
+        @review.ReviewDate.Date<br />
+        <strong class="m-3">Review:</strong>
+        @review.ReviewText<br />
+    </p>
+
+    @if (review.Comments.Count != 0)
     {
-        <p>
-            <strong class="m-3">Title:</strong>
-            @review.BookTitle<br />
-            <strong class="m-3">Author:</strong>
-            @review.AuthorName<br />
-            <strong class="m-3">Reviewer:</strong>
-            @review.Reviewer.Name<br />
-            <strong class="m-3">Review Date:</strong>
-            @review.ReviewDate.Date<br />
-            <strong class="m-3">Review:</strong>
-            @review.ReviewText<br />
-        </p>
+        <h3>Comments</h3>
+
+        @foreach (Comment comment in review.Comments)
+        {
+            <p>
+                <strong class="m-3">Comment:</strong>
+                @comment.CommentText<br />
+                <strong class="m-3">By:</strong>
+                @comment.Commenter.Name<br />
+                <strong class="m-3">Date:</strong>
+                @comment.CommentDate.Date<br />
+            </p>
+        }
     }
+    <a asp-action="Comment" asp-route-reviewId="@review.ReviewID" class="btn btn-secondary col-3">Add Comment</a>
+
+}

@@ -78,22 +78,30 @@ namespace BookReviews.Controllers
 
         // Open the form for entering a comment
         [Authorize]
-        public IActionResult Comment()
+        public IActionResult Comment(int reviewId)
         {
-            return View();
+            var commentVM = new CommentVM { ReviewID = reviewId };
+            return View(commentVM);
         }
 
         [HttpPost]
-        public IActionResult Comment(Comment model)
+        public RedirectToActionResult Comment(CommentVM commentVM)
         {
-            model.Commenter = userManager.GetUserAsync(User).Result;
-            // TODO: get the user's real name in registration
-            model.Commenter.Name = model.Commenter.UserName;  // temporary hack
-            model.CommentDate = DateTime.Now;
-            // Store the model in the database
-           // repo.AddComment(model);
+            // Comment is the domain model
+            var comment = new Comment { CommentText = commentVM.CommentText };
+            comment.Commenter = userManager.GetUserAsync(User).Result;
+            comment.CommentDate = DateTime.Now;
 
-            return View(model);
+            // Retrieve the review that this comment is for
+            var review = (from r in repo.Reviews
+                          where r.ReviewID == commentVM.ReviewID
+                          select r).First<Review>();
+
+            // Store the review with the comment in the database
+            review.Comments.Add(comment);
+            repo.UpdateReview(review);
+
+            return RedirectToAction("Reviews");
         }
 
     }

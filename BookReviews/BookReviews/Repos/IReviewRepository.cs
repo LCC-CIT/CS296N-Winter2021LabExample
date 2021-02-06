@@ -10,5 +10,9 @@ namespace BookReviews.Repos
     {
         IQueryable<Review> Reviews { get; }  // Read (or retrieve) reviews
         void AddReview(Review review);  // Create a review
+        void UpdateReview(Review review);
     }
+
+
+
 }
