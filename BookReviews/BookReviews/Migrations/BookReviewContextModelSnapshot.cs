@@ -26,10 +26,21 @@ namespace BookReviews.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CommentText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommenterId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("ReviewID")
                         .HasColumnType("int");
 
                     b.HasKey("CommentID");
+
+                    b.HasIndex("CommenterId");
 
                     b.HasIndex("ReviewID");
 
@@ -285,6 +296,10 @@ namespace BookReviews.Migrations
 
             modelBuilder.Entity("BookReviews.Models.Comment", b =>
                 {
+                    b.HasOne("BookReviews.Models.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
                     b.HasOne("BookReviews.Models.Review", null)
                         .WithMany("Comments")
                         .HasForeignKey("ReviewID");

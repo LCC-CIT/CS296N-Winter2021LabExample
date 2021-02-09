@@ -34,13 +34,13 @@ namespace BookReviews
             
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                // Assuming that SQL Server is installed on Windows
+                // Assuming that SQL Server is used on Windows and Azure
                 services.AddDbContext<BookReviewContext>(options =>
                    options.UseSqlServer(Configuration["ConnectionStrings:SQLServerConnection"]));
             }
             else
             {
-                // Assuming SQLite is installed on all other operating systems
+                // Assuming SQLite is installed on all other operating systems (like Mac OS)
                 services.AddDbContext<BookReviewContext>(options =>
                     options.UseSqlite(Configuration["ConnectionStrings:SQLiteConnection"]));
             }
@@ -53,7 +53,7 @@ namespace BookReviews
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BookReviewContext context)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsStaging())
             {
                 app.UseDeveloperExceptionPage();
             }

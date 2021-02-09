@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookReviews.Migrations
 {
-    public partial class Comments : Migration
+    public partial class comments : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,11 +13,20 @@ namespace BookReviews.Migrations
                 {
                     CommentID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CommentText = table.Column<string>(nullable: true),
+                    CommentDate = table.Column<DateTime>(nullable: false),
+                    CommenterId = table.Column<string>(nullable: true),
                     ReviewID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_CommenterId",
+                        column: x => x.CommenterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Reviews_ReviewID",
                         column: x => x.ReviewID,
@@ -24,6 +34,11 @@ namespace BookReviews.Migrations
                         principalColumn: "ReviewID",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_CommenterId",
+                table: "Comments",
+                column: "CommenterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ReviewID",
