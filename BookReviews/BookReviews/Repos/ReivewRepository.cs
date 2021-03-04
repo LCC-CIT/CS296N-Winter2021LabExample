@@ -14,9 +14,9 @@ namespace BookReviews.Repos
             context = c;
         }
 
-        public IQueryable<Review> Reviews 
-        { 
-            get 
+        public IQueryable<Review> Reviews
+        {
+            get
             {
                 // Get all the Review objects in the Reviews DbSet
                 // and include the Reivewer object and list of comments in each Review.
@@ -30,6 +30,13 @@ namespace BookReviews.Repos
         {
             context.Reviews.Add(review);
             context.SaveChanges();
+        }
+
+        public Review GetReviewById(int id)
+        {
+            return (from r in context.Reviews
+                    where r.ReviewID == id
+                    select r).FirstOrDefault<Review>();
         }
 
         public void UpdateReview(Review review)

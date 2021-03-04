@@ -22,6 +22,11 @@ namespace BookReviews.Repos
             reviews.Add(review);
         }
 
+        public Review GetReviewById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateReview(Review review)
         {
             throw new NotImplementedException();

@@ -93,9 +93,7 @@ namespace BookReviews.Controllers
             comment.CommentDate = DateTime.Now;
 
             // Retrieve the review that this comment is for
-            var review = (from r in repo.Reviews
-                          where r.ReviewID == commentVM.ReviewID
-                          select r).First<Review>();
+            var review = repo.GetReviewById(commentVM.ReviewID);
 
             // Store the review with the comment in the database
             review.Comments.Add(comment);
