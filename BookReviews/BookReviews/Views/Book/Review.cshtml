@@ -39,17 +39,24 @@
 
 @if (Model != null)
 {
+    <br />
     <h2>Your Review</h2>
-    <p>
-        <strong class="m-3">Title:</strong>
-        @Model.BookTitle<br />
-        <strong class="m-3">Author:</strong>
-        @Model.AuthorName<br />
-        <strong class="m-3">Reviewer:</strong>
-        @Model.Reviewer.Name<br />
-        <strong class="m-3">Review Date:</strong>
-        @Model.ReviewDate<br />
-        <strong class="m-3">Review:</strong>
-        @Model.ReviewText<br />
-    </p>
+
+    <strong class="m-3">Title:</strong>
+    @Model.BookTitle
+    <br />
+    <strong class="m-3">Author:</strong>
+    @Model.AuthorName
+    <br />
+    <strong class="m-3">Reviewer:</strong>
+    @Model.Reviewer.Name
+    <br />
+    <strong class="m-3">Review Date:</strong>
+    @Model.ReviewDate
+    <br />
+    <strong class="m-3">Review:</strong>
+   @Model.ReviewText 
+    <br />
+
+
 }

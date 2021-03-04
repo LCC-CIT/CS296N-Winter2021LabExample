@@ -15,6 +15,7 @@ namespace BookReviews.Repos
             get { return reviews.AsQueryable<Review>(); }
         }
 
+        IQueryable<Review> IReviewRepository.Reviews => throw new NotImplementedException();
 
         public void AddReview(Review review)
         {
@@ -31,5 +32,19 @@ namespace BookReviews.Repos
             review = reviewUpdate;  // replace the old review with the new one
         }
 
+        void IReviewRepository.AddReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
+
+        Review IReviewRepository.GetReviewById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IReviewRepository.UpdateReview(Review review)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

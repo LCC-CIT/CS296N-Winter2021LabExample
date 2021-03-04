@@ -26,6 +26,11 @@ namespace BookReviews.Repos
             }
         }
 
+        public Review GetReviewById(int id)
+        {
+            return Reviews.SingleOrDefault<Review>(r => r.ReviewID == id);
+        }
+
         public void AddReview(Review review)
         {
             context.Reviews.Add(review);
